@@ -16,5 +16,6 @@ Future Modifications:
 *  Add password update feature as well
 *  For now to add another super user one need to do it by backend, so in future will add that feature too.
 
-Couldn't do all due to internship :)
+Couldn't do all due to internship :(
+
 Most of the asked actions for each role have been completed.
