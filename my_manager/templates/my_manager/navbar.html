@@ -1,0 +1,50 @@
+{% load static %}
+
+<style>
+  .logo{
+    height: 100px;
+    width: 100px;
+  }
+  .hi_msg{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="{% url 'home' %}"> <img class = "logo" src="{% static 'images/logo.png' %}" alt="CDPC logo image" > </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if group == "Super User" or group == "Managers (DPC)" or group == "Head Placement Coordinator"  %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Dashboard<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'companies' %}">Companies</a>
+        </li>
+        {% endif %}
+        {% if group == "Super User" or group == "Head Placement Coordinator" %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'managers' %}">Managers</a>
+        </li>
+        {% endif %}
+        {% if group == "Managers (DPC)" %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'manager_user' %}">Your Details</a>
+          </li>
+        {% endif %}
+        {% if group == "Super User" or group == "Head Placement Coordinator" %}
+        <li class="nav-item">
+          <a class ="nav-link" href="{% url 'hpc' %}">Head Placement Coordinators</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <span class="hi_msg">Hi, {{request.user}} </span>
+    <span><a  href="{% url 'logout' %}">Logout</a></span>
+  </nav>

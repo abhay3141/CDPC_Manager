@@ -1,0 +1,72 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+    <br>
+        <div class="d-flex justify-content-center">
+            <h3 id="form-title">Add Manager</h3>
+        </div>
+        <br>
+            <div class="d-flex justify-content-center form_container">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Username(Enter Your Email)
+                                </i>
+                            </span>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Password</i>
+                            </span>
+                        </div>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Confirm Password</i>
+                            </span>
+                        </div>
+                        {{ form.password2 }}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Name</i>
+                            </span>
+                        </div>
+                        {{ form1.name }}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Phone</i>
+                            </span>
+                        </div>
+                        {{ form1.phone }}
+                    </div>
+                    {% if form.username.errors %}
+                        <div class="error-message alert alert-danger">
+                            {{ form.username.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    {% if form.password1.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+
+
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <input class="btn btn-outline-secondary btn-sm btn-block" type="submit" value="Add as Manager"></div>
+                    </form>
+                </div>
+
+
+            {% endblock content %}

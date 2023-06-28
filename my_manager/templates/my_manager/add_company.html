@@ -1,0 +1,70 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="d-flex justify-content-center">
+	<h3 id="form-title">{{message1}}</h3>
+</div>
+<br>
+<div class="d-flex justify-content-center form_container">
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<span class="input-group-text"><i>Name of the Company </i></span>
+					</div>
+					{{ form.name }}    
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<span class="input-group-text"><i>CTC Offering</i></span>
+					</div>
+					{{ form.ctc }}    
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<span class="input-group-text"><i> Stipend </i></span>
+					</div>
+					{{ form.stipend }}    
+				</div>
+				<div>
+					<i>Hiring Who</i>
+					<div>{{ form.hiring_who }}</div>   
+				</div>
+				<br>
+				<div>
+					<i>Role Offering</i>
+					<div>{{ form.Role_offered }}</div>   
+				</div>
+				<br>
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<span class="input-group-text"><i>Contact of Company </i></span>
+					</div>
+					{{ form.company_contact }}    
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<span class="input-group-text"><i>Additional Information </i></span>
+					</div>
+					{{ form.additional_information }}    
+				</div>
+				<div >
+					<i>SPOC</i>
+					{{ form.Spoc }}    
+				</div>
+				<br>
+				{% if group == "Super User" or group == "Head Placement Coordinator" %}
+				<div >
+					<i>Manager</i>
+					{{ form.Manager }}    
+				</div>
+				{% endif %}
+				<br>
+				<input type="submit" value="{{message2}}" class="btn btn-sm btn-info">
+			</form>
+		</div>
+	
+
+{% endblock %}

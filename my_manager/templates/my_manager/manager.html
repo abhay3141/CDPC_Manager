@@ -1,0 +1,45 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h4 class="d-flex justify-content-center font-weight-bold" >Managers</h4>
+            <a class="btn btn-sm btn-info" href = "{% url 'add_manager' %}">Add a manager</a>
+        </div>
+        <br>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                    <th>Phone</th>
+                    <th>Companies Assigned</th>
+                    <th></th>
+                </tr>
+                    {% for manager in managers %}
+                    <tr>
+                    <td>{{manager.name}}</td>
+                    <td>{{manager.my_user.username}}</td>
+                    <td>{{manager.phone}}</td>
+                    <td>
+                        {% for key,value in mydict.items %}
+                            {% if key == manager%}    
+                                {% for val in value %}
+                                    {{val.name}}<br>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td><a class = "btn btn-sm btn-info" href="{% url 'manager_detail' manager.my_user %}">Details</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>    
+</div> 
+
+
+{% endblock content %}

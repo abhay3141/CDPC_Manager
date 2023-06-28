@@ -1,0 +1,47 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+    <h3>{{name}}'s Profile</h3>
+    {% include 'my_manager/status.html' %} 
+    <div class="row">
+        <div class="col-md">
+            <h5>Hey {{name}} , companies assigned to you</h5>
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Role Offering</th>
+                        <th>Contact of Company</th>
+                        <th>ctc</th>
+                        <th>hiring_who</th>
+                        <th>Additional Information</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{company.name}}</td>
+                        <td>
+                            {% for tag in company.Role_offered.all %}
+                                   {{ tag }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>{{company.company_contact}}</td>
+                        <td>{{company.ctc}}</td>
+                        <td>
+                            {% for tag in company.hiring_who.all %}
+                                   {{ tag }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>{{company.additional_information}}</td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'company_detail' company.name %}">Details</a></td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'user_company_update' company.name %}">Update</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

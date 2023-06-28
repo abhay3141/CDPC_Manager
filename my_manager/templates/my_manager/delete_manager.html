@@ -1,0 +1,16 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+    <p>Are you sure you want to remove {{manager.name}}'s data from database?</p>
+    <form action="{% url 'manager_delete' manager.my_user %}" method="POST">
+    {% csrf_token %}
+    <a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+    <input  class="btn btn-danger" type= "submit" value = "Confirm">
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}

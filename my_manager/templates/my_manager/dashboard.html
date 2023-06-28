@@ -1,0 +1,64 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'my_manager/status.html' %}
+
+<br>
+<div class="row">
+    <div class="col-md-5 pl-4">
+        <h5 class="text-center">Student Coordinators</h5>
+        <hr>
+        <div class="card card-body">
+            {% if group == "Super User" or group == "Head Placement Coordinator" %}
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'add_coordinator' %}">Add Student Coordinator</a>
+            {% endif %}
+            <table class="table table-sm">
+                <tr> 
+                    <th></th>
+                    <th></th>
+                    <th>Name</th>
+                    <th></th>
+                    <th>Email Id</th>
+                </tr>
+                {% for coordinator in coordinators %}
+                <tr> 
+                    <td><a class = "btn btn-sm btn-info" href="{% url 'coordinator' coordinator.my_user %}">Details</a></td>
+                    <td></td>
+                    <td>{{coordinator.name}}</td>
+                    <td></td>
+                    <td>{{coordinator.my_user.username}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7 pr-4">
+        <h5 class="text-center">Companies</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'add_company' %}">Add a Company</a>
+            <table class="table table-sm">
+                <tr>         
+                    <th>Company Name</th>
+                    <th>SPOC Assigned</th>
+                    <th>Email of SPOC</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for company in companies %}
+                    <tr>
+                        <td>{{company.name}}</td>
+                        <td>{{company.Spoc.name}}</td>
+                        <td>{{company.Spoc.my_user.username}}</td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'update_company' company.name %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_company' company.name %}">Remove</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>        
+    </div>
+</div>
+
+{% endblock content %}

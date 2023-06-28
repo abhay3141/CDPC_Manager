@@ -1,0 +1,97 @@
+{% extends 'my_manager/base.html'%}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Companies</h5>
+        </div>
+        <br>
+                <div class="card card-body">
+                    <form method = "get" action = "">
+                        <div class="row">
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label >CTC</label>
+                                <br>
+                                 {{ myFilter.form.ctc }}
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                  <label>Stipend</label>
+                                    {{ myFilter.form.stipend }}
+                                </div>
+                              </div>
+                              <div class="col-md-1">
+                                  <div class="form-group">
+                                      <label>Spoc</label>
+                                      <div>
+                                          {{ myFilter.form.Spoc }}
+                                          </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Role Offered (press Ctrl to multiselect)</label>
+                                        <div class="multiselect-container">
+                                            {{ myFilter.form.Role_offered }}
+                                          </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-2">
+                                      <div class="form-group">
+                                          <label>Hiring Who (press Ctrl to multiselect)</label>
+                                          <div class="multiselect-container">
+                                            {{ myFilter.form.hiring_who }}
+                                          </div>
+                                      </div>
+                                    </div>
+                          </div>
+                        <button class="btn btn-primary" type="submit">Apply Filter</button>
+                        <a class="btn btn-sm btn-danger" href="{% url 'companies' %}">Reset</a>
+                    </form>
+                </div> 
+        <br>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Role offering</th>
+                    <th>CTC</th>
+                    <th>Stipend</th>
+                    <th>Spoc</th>
+                    <th>Hiring Whom</th>
+                    <th>Manager</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                   {% for i in companies %}
+                   <tr>
+                         <td>{{i.name}}</td>
+                         <td>
+                            {% for tag in i.Role_offered.all %}
+                                   {{ tag }}<br>
+                            {% endfor %}
+                        </td>
+                         <td>{{i.ctc}}</td>
+                         <td>{{i.stipend}}</td>
+                         <td>{{i.Spoc.name}}</td>
+                         <td>
+                         {% for tag in i.hiring_who.all %}
+                                {{ tag }}<br>
+                         {% endfor %}
+                         </td>
+                         <td>{{i.Manager.name}}</td>
+                         <td><a class="btn btn-sm btn-info" href="{% url 'company_detail' i.name %}">Details</a></td>
+                         <td><a class="btn btn-sm btn-info" href="{% url 'update_company' i.name %}">Update</a></td>
+                   </tr>
+                   {% endfor %}
+            </table>
+        </div>
+    </div>    
+</div> 
+
+{% endblock content %}

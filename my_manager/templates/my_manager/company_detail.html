@@ -1,0 +1,75 @@
+{% extends 'my_manager/base.html'%}
+
+{% block content %}
+
+<style>
+    .comment-box {
+      margin-top: 20px;
+    }
+    .comment-box textarea {
+      resize: vertical;
+    }
+  </style>
+
+  <div class="container">
+    <br>
+    <h1>{{ company.name }}</h1>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <p><strong>CTC:</strong> {{ company.ctc }}</p>
+        <p><strong>Stipend:</strong> {{ company.stipend }}</p>
+        <p><strong>Contact:</strong> {{ company.company_contact }}</p>
+        <p><strong>Hiring Who:</strong> 
+            {% for tag in company.hiring_who.all %}
+                    {{tag }}<br>
+                {% endfor %}
+        </p>
+        <p><strong>Role Offered:</strong> 
+            {% for tag in company.Role_offered.all %}
+                    {{ tag }}<br>
+            {% endfor %}
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Additional Information:</strong></p>
+        <p>{{ company.additional_information }}</p>
+        <p><strong>SPOC:</strong> {{ company.Spoc }}</p>
+        <p><strong>Manager:</strong> {{ company.Manager }}</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>Comments</h2>
+    <!-- Display existing comments here -->
+    {% if comments %}
+      {% for comment in comments %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ comment.author }}</h5>
+            <p class="card-text">{{ comment.comment }}</p>
+            <p class="card-text"><small class="text-muted">{{ comment.created_at }}</small></p>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No comments yet.</p>
+    {% endif %}
+
+    <div class="comment-box">
+      <form method="post" action="{% url 'company_detail' company.name %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <textarea class="form-control" name="comment" rows="4" placeholder="Enter your comment"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Post Comment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}

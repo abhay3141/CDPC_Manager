@@ -1,0 +1,49 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+    <br>
+        <div class="d-flex justify-content-center">
+            <h3 id="form-title">Update the data of this Student Coordinator</h3>
+        </div>
+        <br>
+            <div class="d-flex justify-content-center form_container">
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Email ID</i>
+                            </span>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Name</i>
+                            </span>
+                        </div>
+                        {{ form1.name }}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i>Phone</i>
+                            </span>
+                        </div>
+                        {{ form1.phone }}
+                    </div>
+                    {% if form.username.errors %}
+                        <div class="error-message alert alert-danger">
+                            {{ form.username.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <input class="btn btn-outline-secondary btn-sm btn-block" type="submit" value="Add as a Student Coordinator"></div>
+                    </form>
+                </div>
+
+
+            {% endblock content %}

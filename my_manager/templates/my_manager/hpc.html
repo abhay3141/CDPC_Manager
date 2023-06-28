@@ -1,0 +1,36 @@
+{% extends 'my_manager/base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h4 class="d-flex justify-content-center font-weight-bold">Head Placement Coordinators</h4>
+            <a class="btn btn-sm btn-info" href = "{% url 'add_hpc' %}">Add a Head Placement Coordinator</a>
+        </div>
+        <br>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                    <th>Phone</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                    {% for hpc in hpcs %}
+                    <tr>
+                    <td>{{hpc.name}}</td>
+                    <td>{{hpc.my_user.username}}</td>
+                    <td>{{hpc.phone}}</td>
+                    <td><a class = "btn btn-sm btn-info" href="{% url 'hpc_update' hpc.my_user %}">Update</a></td>
+                    <td><a class = "btn btn-sm btn-danger" href="{% url 'hpc_delete' hpc.my_user %}">Remove</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>    
+</div> 
+
+{% endblock content %}

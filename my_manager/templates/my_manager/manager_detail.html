@@ -1,0 +1,75 @@
+{% extends 'my_manager/base.html'%}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5 class="text-center">Manager:</h5>
+            <hr>
+            <a class="btn btn-outline-info" href="{% url 'manager_update' manager.my_user %}">Update Manager Information</a>
+            <br>
+            <a class="btn btn-outline-info" href="{% url 'assign_company_manager' manager.my_user %}">Assign Companies</a>
+            <br>
+            <a class="btn btn-outline-info" href="{% url 'manager_delete' manager.my_user %}">Delete Manager</a>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5 class="text-center">Manager Information:</h5>
+            <hr>
+            <p class="text-center">User: {{manager.name}}</p>
+            <p class="text-center">Email: {{manager.my_user.username}}</p>
+            <p class="text-center">Phone: {{manager.phone}}</p>            
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5 class="text-center">Total Companies Assigned</h5>
+            <hr>
+            <h1 style="text-align:center;padding:10px">{{companies.count}}</h1>      
+        </div>
+    </div>
+
+</div>    
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class = "card card-body">
+            <table>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Role Offering</th>
+                    <th>Contact of Company</th>
+                    <th>ctc</th>
+                    <th>hiring_who</th>
+                </tr>
+                {% for company in companies %}   
+                <tr>
+                    <td>{{company.name}}</td>
+                    <td>
+                        {% for tag in company.Role_offered.all %}
+                               {{ tag }}<br>
+                        {% endfor %}
+                    </td>
+                    <td>{{company.company_contact}}</td>
+                    <td>{{company.ctc}}</td>
+                    <td>
+                        {% for tag in company.hiring_who.all %}
+                               {{ tag }}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            
+        </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}
