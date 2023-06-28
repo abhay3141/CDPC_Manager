@@ -1,5 +1,8 @@
 # CDPC_Manager
 
+Tech Stack for Backend : Django
+Run in the command line after activating the given virtual env : python manage.py runserver 
+
 Super User
 email: cdpc@iitrpr.ac.in
 pw: abhay
